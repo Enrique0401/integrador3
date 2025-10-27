@@ -131,7 +131,7 @@ public class PantallaDueno extends javax.swing.JFrame {
 
         fondo.setBackground(new java.awt.Color(255, 255, 255));
 
-        menu.setBackground(new java.awt.Color(30, 45, 65));
+        menu.setBackground(new java.awt.Color(18, 60, 109));
 
         mensaje.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 2, 48)); // NOI18N
         mensaje.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,10 +140,13 @@ public class PantallaDueno extends javax.swing.JFrame {
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
+        botonInventario.setBackground(new java.awt.Color(195, 18, 1));
+        botonInventario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonInventario.setForeground(new java.awt.Color(255, 255, 255));
-        botonInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bottle.png"))); // NOI18N
+        botonInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/construccion-del-calendario.gif"))); // NOI18N
         botonInventario.setText("Comentarios");
         botonInventario.setBorder(null);
+        botonInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonInventario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonInventario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -159,10 +162,13 @@ public class PantallaDueno extends javax.swing.JFrame {
             }
         });
 
+        botonUsuarios.setBackground(new java.awt.Color(195, 18, 1));
+        botonUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        botonUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pesas.png"))); // NOI18N
+        botonUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edificio_2.gif"))); // NOI18N
         botonUsuarios.setText("Usuarios");
         botonUsuarios.setBorder(null);
+        botonUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -178,10 +184,13 @@ public class PantallaDueno extends javax.swing.JFrame {
             }
         });
 
+        botonInstructores.setBackground(new java.awt.Color(195, 18, 1));
+        botonInstructores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonInstructores.setForeground(new java.awt.Color(255, 255, 255));
-        botonInstructores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gym_86590.png"))); // NOI18N
+        botonInstructores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/casco.gif"))); // NOI18N
         botonInstructores.setText("Administradores");
         botonInstructores.setBorder(null);
+        botonInstructores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonInstructores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonInstructores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -197,10 +206,13 @@ public class PantallaDueno extends javax.swing.JFrame {
             }
         });
 
+        botonRegresar.setBackground(new java.awt.Color(195, 18, 1));
+        botonRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        botonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/login.png"))); // NOI18N
+        botonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/trabajo-en-progreso.gif"))); // NOI18N
         botonRegresar.setText("Regresar al login");
         botonRegresar.setBorder(null);
+        botonRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonRegresar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -220,10 +232,13 @@ public class PantallaDueno extends javax.swing.JFrame {
         mensaje5.setForeground(new java.awt.Color(255, 255, 255));
         mensaje5.setText("Moroni");
 
+        botonSalir1.setBackground(new java.awt.Color(195, 18, 1));
+        botonSalir1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonSalir1.setForeground(new java.awt.Color(255, 255, 255));
-        botonSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salida.png"))); // NOI18N
+        botonSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salida.gif"))); // NOI18N
         botonSalir1.setText("Salir");
         botonSalir1.setBorder(null);
+        botonSalir1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonSalir1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonSalir1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -297,7 +312,7 @@ public class PantallaDueno extends javax.swing.JFrame {
                 .addGap(67, 67, 67))
         );
 
-        header.setBackground(new java.awt.Color(30, 45, 65));
+        header.setBackground(new java.awt.Color(18, 60, 109));
 
         fecha.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
         fecha.setForeground(new java.awt.Color(255, 255, 255));

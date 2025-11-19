@@ -1,5 +1,6 @@
 package Pantallas;
 
+import Model.Cliente;
 import Model.Dueno;
 import Vistas.*;
 import java.awt.BorderLayout;
@@ -19,12 +20,12 @@ public class PantallaDueno extends javax.swing.JFrame {
         initComponents();
     }
 
-    public PantallaDueno(Dueno dueno) {
+    public PantallaDueno(Cliente cliente) {
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/180.png")).getImage());
         initComponents();
         // Verificar que labelNombres no sea null
-        if (labelNombres != null && dueno != null) {
-            labelNombres.setText(dueno.getNombreDueno());
+        if (labelNombres != null && cliente != null) {
+            labelNombres.setText(cliente.getNombreCliente());
         } else {
             System.err.println("No se pudo mostrar el nombre del Dueno.");
             if (labelNombres == null) {

@@ -205,7 +205,7 @@ public class ClienteRepositorio {
                     cliente.setTelefonoCliente(rs.getString("telefono_cliente"));
                     cliente.setEmailCliente(rs.getString("email_cliente"));
                     cliente.setContrasenaCliente(rs.getString("contrasena_cliente"));
-                    cliente.setRol(rs.getString("rol_cliente"));
+                    cliente.setRol(rs.getString("rol"));
 
                     // Si la base de datos guarda fecha_registro_cliente
                     try {

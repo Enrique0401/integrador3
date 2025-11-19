@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class PantallaCliente extends javax.swing.JFrame {
+public class PantallaSupervisor extends javax.swing.JFrame {
 
 //Recibe del NewLogin
     private Cliente cliente;
@@ -18,13 +18,13 @@ public class PantallaCliente extends javax.swing.JFrame {
     /**
      * Creates new form PantallaDuenio
      */
-    public PantallaCliente() {
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/180.png")).getImage());
+    public PantallaSupervisor() {
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo.png")).getImage());
         initComponents();
     }
 
-    public PantallaCliente(Cliente cliente) {
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/180.png")).getImage());
+    public PantallaSupervisor(Cliente cliente) {
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo.png")).getImage());
         this.cliente = cliente;
         initComponents();
 
@@ -44,7 +44,7 @@ public class PantallaCliente extends javax.swing.JFrame {
         SetDate();
         initStyles();
         InitContent();
-        aplicarColoresBotones();
+        //aplicarColoresBotones();
     }
 
     private void initStyles() {
@@ -70,14 +70,14 @@ public class PantallaCliente extends javax.swing.JFrame {
         /* mostrarJPanelAgendarHorarios();*/
     }
 
-    private void aplicarColoresBotones() {
+    /*private void aplicarColoresBotones() {
         Color color = new Color(30, 45, 65);
         botonAgendarHorarios.setBackground(color);
         botonComprar.setBackground(color);
         botonActualizarDatos.setBackground(color);
         botonRegresar.setBackground(color);
         botonSalir1.setBackground(color);
-    }
+    }*/
 
     /*
     private void mostrarJPanelAgendarHorarios() {
@@ -118,13 +118,13 @@ public class PantallaCliente extends javax.swing.JFrame {
         mensaje = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         botonActualizarDatos = new javax.swing.JButton();
-        botonAgendarHorarios = new javax.swing.JButton();
-        botonComprar = new javax.swing.JButton();
-        botonRegresar = new javax.swing.JButton();
         mensaje4 = new javax.swing.JLabel();
         mensaje5 = new javax.swing.JLabel();
-        botonSalir1 = new javax.swing.JButton();
         mensaje3 = new javax.swing.JLabel();
+        botonInstructores = new javax.swing.JButton();
+        botonSalir1 = new javax.swing.JButton();
+        botonUsuarios = new javax.swing.JButton();
+        botonRegresar = new javax.swing.JButton();
         header = new javax.swing.JPanel();
         fecha = new javax.swing.JLabel();
         mensaje1 = new javax.swing.JLabel();
@@ -133,11 +133,11 @@ public class PantallaCliente extends javax.swing.JFrame {
         mensaje2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pantalla Usuario");
+        setTitle("Pantalla Supervisor");
 
         fondo.setBackground(new java.awt.Color(255, 255, 255));
 
-        menu.setBackground(new java.awt.Color(30, 45, 65));
+        menu.setBackground(new java.awt.Color(18, 60, 109));
 
         mensaje.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 2, 48)); // NOI18N
         mensaje.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,10 +146,12 @@ public class PantallaCliente extends javax.swing.JFrame {
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 
+        botonActualizarDatos.setBackground(new java.awt.Color(195, 18, 1));
         botonActualizarDatos.setForeground(new java.awt.Color(255, 255, 255));
         botonActualizarDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizarDatos.png"))); // NOI18N
         botonActualizarDatos.setText("Actualizar Datos");
         botonActualizarDatos.setBorder(null);
+        botonActualizarDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonActualizarDatos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonActualizarDatos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -165,63 +167,6 @@ public class PantallaCliente extends javax.swing.JFrame {
             }
         });
 
-        botonAgendarHorarios.setForeground(new java.awt.Color(255, 255, 255));
-        botonAgendarHorarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agendarHorarios.png"))); // NOI18N
-        botonAgendarHorarios.setText("Agendar Horarios");
-        botonAgendarHorarios.setBorder(null);
-        botonAgendarHorarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        botonAgendarHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botonAgendarHorariosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botonAgendarHorariosMouseExited(evt);
-            }
-        });
-        botonAgendarHorarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAgendarHorariosActionPerformed(evt);
-            }
-        });
-
-        botonComprar.setForeground(new java.awt.Color(255, 255, 255));
-        botonComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/comprar.png"))); // NOI18N
-        botonComprar.setText("Comprar");
-        botonComprar.setBorder(null);
-        botonComprar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        botonComprar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botonComprarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botonComprarMouseExited(evt);
-            }
-        });
-        botonComprar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonComprarActionPerformed(evt);
-            }
-        });
-
-        botonRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        botonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/login.png"))); // NOI18N
-        botonRegresar.setText("Regresar al login");
-        botonRegresar.setBorder(null);
-        botonRegresar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        botonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botonRegresarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botonRegresarMouseExited(evt);
-            }
-        });
-        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRegresarActionPerformed(evt);
-            }
-        });
-
         mensaje4.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 2, 48)); // NOI18N
         mensaje4.setForeground(new java.awt.Color(255, 255, 255));
         mensaje4.setText("Gym");
@@ -230,10 +175,40 @@ public class PantallaCliente extends javax.swing.JFrame {
         mensaje5.setForeground(new java.awt.Color(255, 255, 255));
         mensaje5.setText("Body");
 
+        mensaje3.setBackground(new java.awt.Color(255, 255, 255));
+        mensaje3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 2, 18)); // NOI18N
+        mensaje3.setForeground(new java.awt.Color(255, 255, 255));
+        mensaje3.setText("Supervisor");
+
+        botonInstructores.setBackground(new java.awt.Color(195, 18, 1));
+        botonInstructores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        botonInstructores.setForeground(new java.awt.Color(255, 255, 255));
+        botonInstructores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/casco.gif"))); // NOI18N
+        botonInstructores.setText("Administradores");
+        botonInstructores.setBorder(null);
+        botonInstructores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonInstructores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        botonInstructores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonInstructoresMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonInstructoresMouseExited(evt);
+            }
+        });
+        botonInstructores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonInstructoresActionPerformed(evt);
+            }
+        });
+
+        botonSalir1.setBackground(new java.awt.Color(195, 18, 1));
+        botonSalir1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonSalir1.setForeground(new java.awt.Color(255, 255, 255));
-        botonSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salida.png"))); // NOI18N
+        botonSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salida.gif"))); // NOI18N
         botonSalir1.setText("Salir");
         botonSalir1.setBorder(null);
+        botonSalir1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonSalir1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonSalir1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -249,41 +224,86 @@ public class PantallaCliente extends javax.swing.JFrame {
             }
         });
 
-        mensaje3.setBackground(new java.awt.Color(255, 255, 255));
-        mensaje3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 2, 18)); // NOI18N
-        mensaje3.setForeground(new java.awt.Color(255, 255, 255));
-        mensaje3.setText("Usuario");
+        botonUsuarios.setBackground(new java.awt.Color(195, 18, 1));
+        botonUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        botonUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        botonUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edificio_2.gif"))); // NOI18N
+        botonUsuarios.setText("Usuarios");
+        botonUsuarios.setBorder(null);
+        botonUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        botonUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonUsuariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonUsuariosMouseExited(evt);
+            }
+        });
+        botonUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonUsuariosActionPerformed(evt);
+            }
+        });
+
+        botonRegresar.setBackground(new java.awt.Color(195, 18, 1));
+        botonRegresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        botonRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        botonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/trabajo-en-progreso.gif"))); // NOI18N
+        botonRegresar.setText("Regresar al login");
+        botonRegresar.setBorder(null);
+        botonRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonRegresar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        botonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonRegresarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonRegresarMouseExited(evt);
+            }
+        });
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(menuLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(mensaje4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(mensaje5, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonAgendarHorarios, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonSalir1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(botonRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonActualizarDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(15, 15, 15))
-            .addGroup(menuLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(mensaje3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mensaje3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonActualizarDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonInstructores, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(menuLayout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(mensaje4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(mensaje5, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(menuLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(15, 15, 15))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,21 +319,22 @@ public class PantallaCliente extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mensaje3)
-                .addGap(74, 74, 74)
-                .addComponent(botonAgendarHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(botonUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botonComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonInstructores, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonActualizarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        header.setBackground(new java.awt.Color(30, 45, 65));
+        header.setBackground(new java.awt.Color(18, 60, 109));
 
+        fecha.setBackground(new java.awt.Color(18, 60, 109));
         fecha.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
         fecha.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -324,7 +345,7 @@ public class PantallaCliente extends javax.swing.JFrame {
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,11 +364,11 @@ public class PantallaCliente extends javax.swing.JFrame {
         contenedor.setLayout(contenedorLayout);
         contenedorLayout.setHorizontalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 892, Short.MAX_VALUE)
         );
         contenedorLayout.setVerticalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 506, Short.MAX_VALUE)
         );
 
         labelNombres.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 2, 48)); // NOI18N
@@ -401,16 +422,16 @@ public class PantallaCliente extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(491, 491, 491)
                     .addComponent(mensaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(492, Short.MAX_VALUE)))
+                    .addContainerGap(587, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(313, 313, 313)
                     .addComponent(mensaje2)
-                    .addContainerGap(313, Short.MAX_VALUE)))
+                    .addContainerGap(342, Short.MAX_VALUE)))
         );
 
         pack();
@@ -442,13 +463,57 @@ public class PantallaCliente extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_botonActualizarDatosActionPerformed
 
-    private void botonAgendarHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgendarHorariosActionPerformed
-        /* mostrarJPanelAgendarHorarios();*/
-    }//GEN-LAST:event_botonAgendarHorariosActionPerformed
+    private void botonActualizarDatosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarDatosMouseEntered
+//        botonActualizarDatos.setBackground(new Color(78, 80, 82));
+    }//GEN-LAST:event_botonActualizarDatosMouseEntered
 
-    private void botonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonComprarActionPerformed
-        /* mostrarJPanelComprar();*/
-    }//GEN-LAST:event_botonComprarActionPerformed
+    private void botonActualizarDatosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarDatosMouseExited
+//        botonActualizarDatos.setBackground(new Color(30, 45, 65));
+    }//GEN-LAST:event_botonActualizarDatosMouseExited
+
+    private void botonUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuariosMouseEntered
+//        botonUsuarios.setBackground(new Color(78, 80, 82));
+    }//GEN-LAST:event_botonUsuariosMouseEntered
+
+    private void botonUsuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonUsuariosMouseExited
+//        botonUsuarios.setBackground(new Color(30, 45, 65));
+    }//GEN-LAST:event_botonUsuariosMouseExited
+
+    private void botonUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUsuariosActionPerformed
+        
+    }//GEN-LAST:event_botonUsuariosActionPerformed
+
+    private void botonInstructoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInstructoresMouseEntered
+//        botonInstructores.setBackground(new Color(78, 80, 82));
+    }//GEN-LAST:event_botonInstructoresMouseEntered
+
+    private void botonInstructoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInstructoresMouseExited
+//        botonInstructores.setBackground(new Color(30, 45, 65));
+    }//GEN-LAST:event_botonInstructoresMouseExited
+
+    private void botonInstructoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInstructoresActionPerformed
+
+    }//GEN-LAST:event_botonInstructoresActionPerformed
+
+    private void botonSalir1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalir1MouseEntered
+//        botonSalir1.setBackground(new Color(78, 80, 82));
+    }//GEN-LAST:event_botonSalir1MouseEntered
+
+    private void botonSalir1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalir1MouseExited
+//        botonSalir1.setBackground(new Color(30, 45, 65));
+    }//GEN-LAST:event_botonSalir1MouseExited
+
+    private void botonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalir1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_botonSalir1ActionPerformed
+
+    private void botonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegresarMouseEntered
+//        botonRegresar.setBackground(new Color(78, 80, 82));
+    }//GEN-LAST:event_botonRegresarMouseEntered
+
+    private void botonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegresarMouseExited
+//        botonRegresar.setBackground(new Color(30, 45, 65));
+    }//GEN-LAST:event_botonRegresarMouseExited
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
         NewLogin nlog = new NewLogin();
@@ -456,60 +521,16 @@ public class PantallaCliente extends javax.swing.JFrame {
         nlog.setVisible(true);
     }//GEN-LAST:event_botonRegresarActionPerformed
 
-    private void botonAgendarHorariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgendarHorariosMouseEntered
-        botonAgendarHorarios.setBackground(new Color(78, 80, 82));
-    }//GEN-LAST:event_botonAgendarHorariosMouseEntered
-
-    private void botonAgendarHorariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgendarHorariosMouseExited
-        botonAgendarHorarios.setBackground(new Color(30, 45, 65));
-    }//GEN-LAST:event_botonAgendarHorariosMouseExited
-
-    private void botonComprarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonComprarMouseEntered
-        botonComprar.setBackground(new Color(78, 80, 82));
-    }//GEN-LAST:event_botonComprarMouseEntered
-
-    private void botonComprarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonComprarMouseExited
-        botonComprar.setBackground(new Color(30, 45, 65));
-    }//GEN-LAST:event_botonComprarMouseExited
-
-    private void botonActualizarDatosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarDatosMouseEntered
-        botonActualizarDatos.setBackground(new Color(78, 80, 82));
-    }//GEN-LAST:event_botonActualizarDatosMouseEntered
-
-    private void botonActualizarDatosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarDatosMouseExited
-        botonActualizarDatos.setBackground(new Color(30, 45, 65));
-    }//GEN-LAST:event_botonActualizarDatosMouseExited
-
-    private void botonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegresarMouseEntered
-        botonRegresar.setBackground(new Color(78, 80, 82));
-    }//GEN-LAST:event_botonRegresarMouseEntered
-
-    private void botonRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegresarMouseExited
-        botonRegresar.setBackground(new Color(30, 45, 65));
-    }//GEN-LAST:event_botonRegresarMouseExited
-
-    private void botonSalir1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalir1MouseEntered
-        botonSalir1.setBackground(new Color(78, 80, 82));
-    }//GEN-LAST:event_botonSalir1MouseEntered
-
-    private void botonSalir1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalir1MouseExited
-        botonSalir1.setBackground(new Color(30, 45, 65));
-    }//GEN-LAST:event_botonSalir1MouseExited
-
-    private void botonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalir1ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_botonSalir1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonActualizarDatos;
-    private javax.swing.JButton botonAgendarHorarios;
-    private javax.swing.JButton botonComprar;
+    private javax.swing.JButton botonInstructores;
     private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSalir1;
+    private javax.swing.JButton botonUsuarios;
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel fecha;
     private javax.swing.JPanel fondo;

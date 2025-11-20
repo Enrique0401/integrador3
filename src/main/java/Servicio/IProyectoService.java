@@ -1,17 +1,17 @@
 package Servicio;
 
-import Model.Cliente;
+import Model.Proyectos;
 import java.util.List;
 
-public interface IClienteService {
+public interface IProyectoService {
 
-    List<Cliente> obtenerTodos();
+    List<Proyectos> obtenerTodos();
 
-    Cliente buscarPorId(int id);
+    Proyectos buscarPorId(int id);
 
-    boolean eliminar(int idCliente);
+    boolean eliminar(int idProyecto);
 
-    boolean actualizar(Cliente cliente);
+    boolean actualizar(Proyectos proyecto);
 
-    boolean registrar(Cliente cliente);
+    boolean registrar(Proyectos proyecto);
 }

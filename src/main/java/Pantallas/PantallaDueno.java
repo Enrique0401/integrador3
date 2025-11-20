@@ -69,7 +69,7 @@ public class PantallaDueno extends javax.swing.JFrame {
     }
 
     private void mostrarJPanelUsuario(JPanel p) {
-        TablaCliente prin = new TablaCliente();
+        TablaUsuario prin = new TablaUsuario();
         prin.setSize(797, 449);
         prin.setLocation(0, 0);
 

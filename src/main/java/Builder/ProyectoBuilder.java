@@ -1,78 +1,71 @@
 package Builder;
 
-import Model.Cliente;
+import Model.Proyectos;
 import java.time.LocalDateTime;
 
-public class ClienteBuilder {
+public class ProyectoBuilder {
 
+    private int idProyecto;
+    private String nombreProyecto;
+    private String categoriaProyecto;
+    private String descripcionProyecto;
+    private String estadoProyecto;
+    private int progresoProyecto;
+    private LocalDateTime fechaEntrega;
     private int idCliente;
-    private String nombreCliente;
-    private String rucCliente;
-    private String direccionCliente;
-    private String telefonoCliente;
-    private String emailCliente;
-    private String contrasenaCliente;
-    private String rol;
-    private LocalDateTime fechaRegistro;
 
     // 🔹 Métodos tipo "con" para asignar valores
-    public ClienteBuilder conIdCliente(int idCliente) {
+    public ProyectoBuilder conIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
+        return this;
+    }
+
+    public ProyectoBuilder conNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
+        return this;
+    }
+
+    public ProyectoBuilder conCategoriaProyecto(String categoriaProyecto) {
+        this.categoriaProyecto = categoriaProyecto;
+        return this;
+    }
+
+    public ProyectoBuilder conDescripcionProyecto(String descripcionProyecto) {
+        this.descripcionProyecto = descripcionProyecto;
+        return this;
+    }
+
+    public ProyectoBuilder conEstadoProyecto(String estadoProyecto) {
+        this.estadoProyecto = estadoProyecto;
+        return this;
+    }
+
+    public ProyectoBuilder conProgresoProyecto(int progresoProyecto) {
+        this.progresoProyecto = progresoProyecto;
+        return this;
+    }
+
+    public ProyectoBuilder conFechaEntrega(LocalDateTime fechaEntrega) {
+        this.fechaEntrega = fechaEntrega;
+        return this;
+    }
+    
+    public ProyectoBuilder conIdCliente(int idCliente) {
         this.idCliente = idCliente;
         return this;
     }
 
-    public ClienteBuilder conNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
-        return this;
-    }
-
-    public ClienteBuilder conRucCliente(String rucCliente) {
-        this.rucCliente = rucCliente;
-        return this;
-    }
-
-    public ClienteBuilder conDireccionCliente(String direccionCliente) {
-        this.direccionCliente = direccionCliente;
-        return this;
-    }
-
-    public ClienteBuilder conTelefonoCliente(String telefonoCliente) {
-        this.telefonoCliente = telefonoCliente;
-        return this;
-    }
-
-    public ClienteBuilder conEmailCliente(String emailCliente) {
-        this.emailCliente = emailCliente;
-        return this;
-    }
-
-    public ClienteBuilder conContrasenaCliente(String contrasenaCliente) {
-        this.contrasenaCliente = contrasenaCliente;
-        return this;
-    }
-
-    public ClienteBuilder conRol(String rol) {
-        this.rol = rol;
-        return this;
-    }
-
-    public ClienteBuilder conFechaRegistro(LocalDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-        return this;
-    }
-
     // 🔹 Método final para construir el objeto
-    public Cliente build() {
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(idCliente);
-        cliente.setNombreCliente(nombreCliente);
-        cliente.setRucCliente(rucCliente);
-        cliente.setDireccionCliente(direccionCliente);
-        cliente.setTelefonoCliente(telefonoCliente);
-        cliente.setEmailCliente(emailCliente);
-        cliente.setContrasenaCliente(contrasenaCliente);
-        cliente.setRol(rol);
-        cliente.setFechaRegistro(fechaRegistro != null ? fechaRegistro : LocalDateTime.now());
-        return cliente;
+    public Proyectos build() {
+        Proyectos proy = new Proyectos();
+        proy.setIdProyecto(idProyecto);
+        proy.setCategoria(categoriaProyecto);
+        proy.setDescripcion(descripcionProyecto);
+        proy.setEstado(estadoProyecto);
+        proy.setNombre(nombreProyecto);
+        proy.setProgreso(progresoProyecto);
+        proy.setFechaEntrega(fechaEntrega != null ? fechaEntrega : LocalDateTime.now());
+        proy.setIdCliente(idCliente);
+        return proy;
     }
 }

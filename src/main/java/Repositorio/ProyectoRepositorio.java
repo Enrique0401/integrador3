@@ -1,48 +1,46 @@
 package Repositorio;
 
-import Builder.ClienteBuilder;
-import Model.Cliente;
+import Builder.ProyectoBuilder;
+import Model.Proyectos;
 import ServiciosMoroniConexion.BaseDatosConexion;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteRepositorio {
+public class ProyectoRepositorio {
 
     private final BaseDatosConexion conexionDB = BaseDatosConexion.getInstancia();
+
+    public ProyectoRepositorio() {
+    }
 
     // ================================
     // REGISTRAR CLIENTE
     // ================================
-    public boolean registrar(Cliente cliente) {
-        if (emailRegistrado(cliente.getEmailCliente()) || telefonoRegistrado(cliente.getTelefonoCliente())) {
-            System.err.println("⚠️ El email o teléfono ya está registrado.");
-            return false;
-        }
+    public boolean registrar(Proyectos proyecto) {
 
         String sql = """
-        INSERT INTO cliente (
-            nombre_cliente, ruc_cliente, direccion_cliente,
-            telefono_cliente, email_cliente, contrasena_cliente, rol
+        INSERT INTO proyecto (
+            estado, fecha_entrega, nombre,
+            progreso, cliente_id, categoria, descripcion
         ) VALUES (?, ?, ?, ?, ?, ?, ?)
-        """;
+    """;
 
         try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, cliente.getNombreCliente());
-            ps.setString(2, cliente.getRucCliente());
-            ps.setString(3, cliente.getDireccionCliente());
-            ps.setString(4, cliente.getTelefonoCliente());
-            ps.setString(5, cliente.getEmailCliente());
-            ps.setString(6, cliente.getContrasenaCliente());
-            ps.setString(7, cliente.getRol() != null ? cliente.getRol() : "ROL_USER");
-
+            ps.setString(1, proyecto.getEstado());
+            ps.setTimestamp(2, Timestamp.valueOf(proyecto.getFechaEntrega()));
+            ps.setString(3, proyecto.getNombre());
+            ps.setInt(4, proyecto.getProgreso());
+            ps.setInt(5, proyecto.getIdCliente());
+            ps.setString(6, proyecto.getCategoria());
+            ps.setString(7, proyecto.getDescripcion());
             ps.executeUpdate();
             return true;
 
         } catch (SQLException e) {
-            System.err.println("❌ Error al registrar cliente: " + e.getMessage());
+            System.err.println("❌ Error al registrar proyecto: " + e.getMessage());
             return false;
         }
     }
@@ -50,29 +48,29 @@ public class ClienteRepositorio {
     // ================================
     // ACTUALIZAR CLIENTE
     // ================================
-    public boolean actualizar(Cliente cliente) {
+    public boolean actualizar(Proyectos proyecto) {
         String sql = """
-        UPDATE cliente
-        SET nombre_cliente = ?, ruc_cliente = ?, direccion_cliente = ?,
-            telefono_cliente = ?, email_cliente = ?, contrasena_cliente = ?, rol = ?
-        WHERE id_cliente = ?
+        UPDATE proyecto
+        SET categoria = ?, descripcion = ?, estado = ?, 
+            fecha_entrega = ?, nombre = ?, progreso = ?, cliente_id = ?
+        WHERE id = ?
         """;
 
         try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, cliente.getNombreCliente());
-            ps.setString(2, cliente.getRucCliente());
-            ps.setString(3, cliente.getDireccionCliente());
-            ps.setString(4, cliente.getTelefonoCliente());
-            ps.setString(5, cliente.getEmailCliente());
-            ps.setString(6, cliente.getContrasenaCliente());
-            ps.setString(7, cliente.getRol());
-            ps.setInt(8, cliente.getIdCliente());
+            ps.setString(1, proyecto.getCategoria());
+            ps.setString(2, proyecto.getDescripcion());
+            ps.setString(3, proyecto.getEstado());
+            ps.setTimestamp(4, Timestamp.valueOf(proyecto.getFechaEntrega()));
+            ps.setString(5, proyecto.getNombre());
+            ps.setInt(6, proyecto.getProgreso());
+            ps.setInt(7, proyecto.getIdCliente());
+            ps.setInt(8, proyecto.getIdProyecto());
 
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            System.err.println("❌ Error al actualizar cliente: " + e.getMessage());
+            System.err.println("❌ Error al actualizar proyecto: " + e.getMessage());
             return false;
         }
     }
@@ -80,52 +78,54 @@ public class ClienteRepositorio {
     // ================================
     // OBTENER CLIENTES
     // ================================
-    public Cliente obtenerPorId(int id) {
-        String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+    public Proyectos obtenerPorId(int id) {
+        String sql = "SELECT * FROM proyecto WHERE id = ?";
         try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return construirClienteDesdeResultSet(rs);
+                return construirProyectoDesdeResultSet(rs);
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Error al obtener cliente por ID: " + e.getMessage());
+            System.err.println("❌ Error al obtener proyecto por ID: " + e.getMessage());
         }
         return null;
     }
 
-    public Cliente obtenerPorEmail(String email) {
-        String sql = "SELECT * FROM cliente WHERE LOWER(email_cliente) = LOWER(?)";
+    public Proyectos obtenerPorUsuario(int idCliente) {
+        String sql = "SELECT * FROM proyecto WHERE cliente_id = ?";
+
         try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, email.trim().toLowerCase());
+            ps.setInt(1, idCliente);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return construirClienteDesdeResultSet(rs);
+                return construirProyectoDesdeResultSet(rs);
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Error al obtener cliente por email: " + e.getMessage());
+            System.err.println("❌ Error al obtener proyecto por cliente_id: " + e.getMessage());
         }
+
         return null;
     }
 
-    public List<Cliente> obtenerTodos() {
-        List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM cliente ORDER BY id_cliente";
+    public List<Proyectos> obtenerTodos() {
+        List<Proyectos> lista = new ArrayList<>();
+        String sql = "SELECT * FROM proyecto ORDER BY id";
 
         try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                lista.add(construirClienteDesdeResultSet(rs));
+                lista.add(construirProyectoDesdeResultSet(rs));
             }
 
         } catch (SQLException e) {
-            System.err.println("❌ Error al listar clientes: " + e.getMessage());
+            System.err.println("❌ Error al listar proyectos: " + e.getMessage());
         }
         return lista;
     }
@@ -134,14 +134,14 @@ public class ClienteRepositorio {
     // ELIMINAR CLIENTE
     // ================================
     public boolean eliminar(int id) {
-        String sql = "DELETE FROM cliente WHERE id_cliente = ?";
-        try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        String sql = "DELETE FROM proyecto WHERE id = ?";
 
+        try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
-            return ps.executeUpdate() > 0;
+            return ps.executeUpdate() > 0; // true si borró, false si no existía
 
         } catch (SQLException e) {
-            System.err.println("❌ Error al eliminar cliente: " + e.getMessage());
+            System.err.println("❌ Error al eliminar proyecto: " + e.getMessage());
             return false;
         }
     }
@@ -149,9 +149,9 @@ public class ClienteRepositorio {
     // ================================
     // VALIDACIONES
     // ================================
-    public boolean emailRegistrado(String email) {
-        String sql = "SELECT COUNT(*) FROM cliente WHERE LOWER(email_cliente) = LOWER(?)";
-        return verificarExistencia(sql, email);
+    public boolean idRegistrado(int idCliente) {
+        String sql = "SELECT COUNT(*) FROM cliente WHERE id_cliente = ?";
+        return verificarExistencia(sql, idCliente);
     }
 
     public boolean telefonoRegistrado(String telefono) {
@@ -175,52 +175,60 @@ public class ClienteRepositorio {
     // ================================
     // CONSTRUCTOR DE CLIENTE (desde BD)
     // ================================
-    private Cliente construirClienteDesdeResultSet(ResultSet rs) throws SQLException {
-        return new ClienteBuilder()
-                .conIdCliente(rs.getInt("id_cliente"))
-                .conNombreCliente(rs.getString("nombre_cliente"))
-                .conRucCliente(rs.getString("ruc_cliente"))
-                .conDireccionCliente(rs.getString("direccion_cliente"))
-                .conTelefonoCliente(rs.getString("telefono_cliente"))
-                .conEmailCliente(rs.getString("email_cliente"))
-                .conContrasenaCliente(rs.getString("contrasena_cliente"))
-                .conRol(rs.getString("rol"))
+    private Proyectos construirProyectoDesdeResultSet(ResultSet rs) throws SQLException {
+        return new ProyectoBuilder()
+                .conIdProyecto(rs.getInt("id"))
+                .conNombreProyecto(rs.getString("nombre"))
+                .conCategoriaProyecto(rs.getString("categoria"))
+                .conDescripcionProyecto(rs.getString("descripcion"))
+                .conEstadoProyecto(rs.getString("estado"))
+                .conProgresoProyecto(rs.getInt("progreso"))
+                .conFechaEntrega(rs.getTimestamp("fecha_entrega").toLocalDateTime())
+                .conIdCliente(rs.getInt("cliente_id"))
                 .build();
     }
 
-    public Cliente verPorEmail(String email) {
-        String sql = "SELECT * FROM Cliente WHERE LOWER(email_cliente) = LOWER(?)";
+    public List<Proyectos> verPorEstado(String estado) {
+        String sql = "SELECT * FROM proyecto WHERE LOWER(estado) = LOWER(?)";
+        List<Proyectos> lista = new ArrayList<>();
 
         try (Connection conn = conexionDB.establecerConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, email.trim().toLowerCase());
+            ps.setString(1, estado.trim().toLowerCase());
 
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    Cliente cliente = new Cliente();
-                    cliente.setIdCliente(rs.getInt("id_cliente"));
-                    cliente.setNombreCliente(rs.getString("nombre_cliente"));
-                    cliente.setRucCliente(rs.getString("ruc_cliente"));
-                    cliente.setDireccionCliente(rs.getString("direccion_cliente"));
-                    cliente.setTelefonoCliente(rs.getString("telefono_cliente"));
-                    cliente.setEmailCliente(rs.getString("email_cliente"));
-                    cliente.setContrasenaCliente(rs.getString("contrasena_cliente"));
-                    cliente.setRol(rs.getString("rol"));
 
-                    // Si la base de datos guarda fecha_registro_cliente
+                while (rs.next()) {
+                    Proyectos p = new Proyectos();
+
+                    p.setIdProyecto(rs.getInt("id"));
+                    p.setNombre(rs.getString("nombre"));
+                    p.setDescripcion(rs.getString("descripcion"));
+                    p.setEstado(rs.getString("estado"));
+                    p.setIdCliente(rs.getInt("cliente_id"));
+                    p.setProgreso(rs.getInt("progreso"));
+                    p.setCategoria(rs.getString("categoria"));
+
                     try {
-                        cliente.setFechaRegistro(rs.getTimestamp("fecha_registro_cliente").toLocalDateTime());
+                        Date fecha = rs.getDate("fecha_entrega");
+                        p.setFechaEntrega(
+                                fecha != null
+                                        ? fecha.toLocalDate().atStartOfDay()
+                                        : null
+                        );
                     } catch (Exception e) {
-                        cliente.setFechaRegistro(null);
+                        p.setFechaEntrega(null);
                     }
 
-                    return cliente;
+                    lista.add(p);
                 }
             }
 
-        } catch (Exception e) {
-            System.err.println("⚠️ Error al obtener cliente por email: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("⚠️ Error al obtener proyectos por estado: " + e.getMessage());
         }
-        return null;
+
+        return lista;
     }
+
 }

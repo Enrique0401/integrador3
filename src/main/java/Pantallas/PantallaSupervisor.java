@@ -69,6 +69,28 @@ public class PantallaSupervisor extends javax.swing.JFrame {
     private void InitContent() {
         /* mostrarJPanelAgendarHorarios();*/
     }
+    
+    private void mostrarJPanelUsuario(JPanel p) {
+        TablaUsuario prin = new TablaUsuario();
+        prin.setSize(797, 449);
+        prin.setLocation(0, 0);
+
+        contenedor.removeAll();
+        contenedor.add(prin, BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }
+    
+    private void mostrarJPanelProyectos(JPanel p) {
+        TablaProyectos prin = new TablaProyectos();
+        prin.setSize(797, 449);
+        prin.setLocation(0, 0);
+
+        contenedor.removeAll();
+        contenedor.add(prin, BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+    }
 
     /*private void aplicarColoresBotones() {
         Color color = new Color(30, 45, 65);
@@ -125,6 +147,7 @@ public class PantallaSupervisor extends javax.swing.JFrame {
         botonSalir1 = new javax.swing.JButton();
         botonUsuarios = new javax.swing.JButton();
         botonRegresar = new javax.swing.JButton();
+        botonActualizarDatos1 = new javax.swing.JButton();
         header = new javax.swing.JPanel();
         fecha = new javax.swing.JLabel();
         mensaje1 = new javax.swing.JLabel();
@@ -149,7 +172,7 @@ public class PantallaSupervisor extends javax.swing.JFrame {
         botonActualizarDatos.setBackground(new java.awt.Color(195, 18, 1));
         botonActualizarDatos.setForeground(new java.awt.Color(255, 255, 255));
         botonActualizarDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizarDatos.png"))); // NOI18N
-        botonActualizarDatos.setText("Actualizar Datos");
+        botonActualizarDatos.setText("Incidencias");
         botonActualizarDatos.setBorder(null);
         botonActualizarDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonActualizarDatos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -184,7 +207,7 @@ public class PantallaSupervisor extends javax.swing.JFrame {
         botonInstructores.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonInstructores.setForeground(new java.awt.Color(255, 255, 255));
         botonInstructores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/casco.gif"))); // NOI18N
-        botonInstructores.setText("Administradores");
+        botonInstructores.setText("Proyectos");
         botonInstructores.setBorder(null);
         botonInstructores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonInstructores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -228,7 +251,7 @@ public class PantallaSupervisor extends javax.swing.JFrame {
         botonUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         botonUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edificio_2.gif"))); // NOI18N
-        botonUsuarios.setText("Usuarios");
+        botonUsuarios.setText("Clientes");
         botonUsuarios.setBorder(null);
         botonUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -268,6 +291,27 @@ public class PantallaSupervisor extends javax.swing.JFrame {
             }
         });
 
+        botonActualizarDatos1.setBackground(new java.awt.Color(195, 18, 1));
+        botonActualizarDatos1.setForeground(new java.awt.Color(255, 255, 255));
+        botonActualizarDatos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/billetes.png"))); // NOI18N
+        botonActualizarDatos1.setText("Seguimientos");
+        botonActualizarDatos1.setBorder(null);
+        botonActualizarDatos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonActualizarDatos1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        botonActualizarDatos1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonActualizarDatos1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonActualizarDatos1MouseExited(evt);
+            }
+        });
+        botonActualizarDatos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarDatos1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -278,13 +322,6 @@ public class PantallaSupervisor extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonActualizarDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonInstructores, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
                         .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
@@ -298,11 +335,19 @@ public class PantallaSupervisor extends javax.swing.JFrame {
                                         .addComponent(mensaje4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(mensaje5, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(menuLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonActualizarDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonActualizarDatos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(menuLayout.createSequentialGroup()
+                                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(botonInstructores, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(botonSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(15, 15, 15))
         );
         menuLayout.setVerticalGroup(
@@ -319,10 +364,12 @@ public class PantallaSupervisor extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mensaje3)
-                .addGap(84, 84, 84)
+                .addGap(55, 55, 55)
                 .addComponent(botonUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonInstructores, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonActualizarDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonActualizarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -480,7 +527,7 @@ public class PantallaSupervisor extends javax.swing.JFrame {
     }//GEN-LAST:event_botonUsuariosMouseExited
 
     private void botonUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUsuariosActionPerformed
-        
+        mostrarJPanelUsuario(new TablaCliente());
     }//GEN-LAST:event_botonUsuariosActionPerformed
 
     private void botonInstructoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInstructoresMouseEntered
@@ -492,7 +539,7 @@ public class PantallaSupervisor extends javax.swing.JFrame {
     }//GEN-LAST:event_botonInstructoresMouseExited
 
     private void botonInstructoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInstructoresActionPerformed
-
+        mostrarJPanelProyectos(new TablaProyectos());
     }//GEN-LAST:event_botonInstructoresActionPerformed
 
     private void botonSalir1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalir1MouseEntered
@@ -521,12 +568,25 @@ public class PantallaSupervisor extends javax.swing.JFrame {
         nlog.setVisible(true);
     }//GEN-LAST:event_botonRegresarActionPerformed
 
+    private void botonActualizarDatos1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarDatos1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarDatos1MouseEntered
+
+    private void botonActualizarDatos1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarDatos1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarDatos1MouseExited
+
+    private void botonActualizarDatos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarDatos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarDatos1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonActualizarDatos;
+    private javax.swing.JButton botonActualizarDatos1;
     private javax.swing.JButton botonInstructores;
     private javax.swing.JButton botonRegresar;
     private javax.swing.JButton botonSalir1;

@@ -1,28 +1,27 @@
 package Servicio;
 
-import Model.Cliente;
+import Model.Proyectos;
 import Observer.EntidadObservableSingleton;
-import Repositorio.ClienteRepositorio;
-import Repositorio.AuthService;
+import Repositorio.ProyectoRepositorio;
 
 import javax.swing.JOptionPane;
 import java.util.List;
 
-public class ClienteService implements IClienteService {
+public class ProyectoService implements IProyectoService {
 
-    private final ClienteRepositorio repositorio;
+    private final ProyectoRepositorio repositorio;
 
-    public ClienteService(ClienteRepositorio repositorio) {
+    public ProyectoService(ProyectoRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 
     @Override
-    public List<Cliente> obtenerTodos() {
+    public List<Proyectos> obtenerTodos() {
         return repositorio.obtenerTodos();
     }
 
     @Override
-    public Cliente buscarPorId(int id) {
+    public Proyectos buscarPorId(int id) {
         return repositorio.obtenerPorId(id);
     }
 
@@ -39,12 +38,12 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public boolean actualizar(Cliente cliente) {
-        if (!validarAntesDeActualizar(cliente)) {
+    public boolean actualizar(Proyectos proyecto) {
+        /*if (!validarAntesDeActualizar(proyecto)) {
             return false;
-        }
+        }*/
 
-        boolean exito = repositorio.actualizar(cliente);
+        boolean exito = repositorio.actualizar(proyecto);
         if (exito) {
             JOptionPane.showMessageDialog(null, "✅ Cliente actualizado correctamente.");
             EntidadObservableSingleton.getInstancia().notificarObservadores();
@@ -55,12 +54,12 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public boolean registrar(Cliente cliente) {
-        if (!validarAntesDeRegistrar(cliente)) {
+    public boolean registrar(Proyectos proyecto) {
+        /*if (!validarAntesDeRegistrar(proyecto)) {
             return false;
-        }
+        }*/
 
-        boolean fueExitoso = repositorio.registrar(cliente);
+        boolean fueExitoso = repositorio.registrar(proyecto);
         if (fueExitoso) {
             EntidadObservableSingleton.getInstancia().notificarObservadores();
         } else {
@@ -72,56 +71,37 @@ public class ClienteService implements IClienteService {
     // ============================================================
     // 🔍 VALIDACIONES DE NEGOCIO
     // ============================================================
-    private boolean validarAntesDeRegistrar(Cliente cliente) {
-        if (!validarCampos(cliente)) {
+    /*private boolean validarAntesDeRegistrar(Proyectos proyecto) {
+        if (!validarCampos(proyecto)) {
             return false;
         }
 
-        if (repositorio.emailRegistrado(cliente.getEmailCliente())) {
+        if (repositorio.idRegistrado(proyecto.getIdProyecto())) {
             JOptionPane.showMessageDialog(null, "❌ El correo ya está registrado.");
-            return false;
-        }
-
-        if (repositorio.telefonoRegistrado(cliente.getTelefonoCliente())) {
-            JOptionPane.showMessageDialog(null, "❌ El teléfono ya está registrado.");
             return false;
         }
 
         return true;
     }
 
-    private boolean validarAntesDeActualizar(Cliente cliente) {
-        if (!validarCampos(cliente)) {
+    private boolean validarAntesDeActualizar(Proyectos proyecto) {
+
+        // 1. Validar que los campos básicos no estén vacíos (si usas ese método)
+        if (!validarCampos(proyecto)) {
             return false;
         }
 
-        int id = cliente.getIdCliente();
+        // 2. Obtener el ID del proyecto
+        int id = proyecto.getIdProyecto();
 
-        /* Nota: tus métodos emailRegistrado/telefonoRegistrado buscan existencia global.
-           Si quieres permitir que el cliente mantenga su mismo email/telefono, deberías
-           implementar métodos que excluyan su propio id (ej. existeEmail(email, id)).
-           Por ahora validamos de forma simple: si existe y no pertenece al mismo id -> error. */
-        Cliente porEmail = repositorio.obtenerPorEmail(cliente.getEmailCliente());
-        if (porEmail != null && porEmail.getIdCliente() != id) {
-            JOptionPane.showMessageDialog(null, "❌ El correo ya está en uso por otro cliente.");
+        // 3. Verificar que el ID exista en la base de datos
+        if (!idRegistrado(id)) {
+            JOptionPane.showMessageDialog(null,
+                    "❌ El ID del proyecto no existe. No se puede actualizar.");
             return false;
         }
 
-        // Para teléfono similar:
-        // (tu repositorio no tiene obtenerPorTelefono, así que reutilizamos telefonoRegistrado y comprobamos id)
-        if (cliente.getTelefonoCliente() != null && !cliente.getTelefonoCliente().isEmpty()) {
-            List<Cliente> todos = repositorio.obtenerTodos();
-            for (Cliente c : todos) {
-                if (c.getTelefonoCliente() != null
-                        && c.getTelefonoCliente().equals(cliente.getTelefonoCliente())
-                        && c.getIdCliente() != id) {
-                    JOptionPane.showMessageDialog(null, "❌ El teléfono ya está en uso por otro cliente.");
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return true; // Todo OK
     }
 
     private boolean validarCampos(Cliente cliente) {
@@ -150,27 +130,24 @@ public class ClienteService implements IClienteService {
         }
 
         return true;
-    }
+    }*/
 
     // ============================================================
     // 🔐 ELIMINAR CON CONFIRMACIÓN Y VALIDACIÓN DE CREDENCIALES
     // ============================================================
-    public boolean eliminarConConfirmacion(int id, String contrasena) {
-        Cliente cli = repositorio.obtenerPorId(id);
-        if (cli == null) {
-            JOptionPane.showMessageDialog(null, "❌ Cliente no encontrado.");
+    public boolean eliminarProyectoConConfirmacion(int idProyecto) {
+
+        // 1. Verificar si existe
+        Proyectos proyecto = repositorio.obtenerPorId(idProyecto);
+        if (proyecto == null) {
+            JOptionPane.showMessageDialog(null, "❌ Proyecto no encontrado.");
             return false;
         }
 
-        String passAlmacenada = cli.getContrasenaCliente();
-        if (passAlmacenada == null || !passAlmacenada.equals(contrasena)) {
-            JOptionPane.showMessageDialog(null, "❌ Credenciales incorrectas.");
-            return false;
-        }
-
+        // 2. Confirmación
         int confirmacion = JOptionPane.showConfirmDialog(
                 null,
-                "¿Estás seguro de eliminar tu cuenta?",
+                "¿Estás seguro de eliminar este proyecto?",
                 "Confirmar eliminación",
                 JOptionPane.YES_NO_OPTION
         );
@@ -179,14 +156,17 @@ public class ClienteService implements IClienteService {
             return false;
         }
 
-        boolean eliminado = repositorio.eliminar(id);
+        // 3. Intentar eliminar
+        boolean eliminado = repositorio.eliminar(idProyecto);
+
         if (eliminado) {
-            JOptionPane.showMessageDialog(null, "✅ Cuenta eliminada exitosamente.");
+            JOptionPane.showMessageDialog(null, "✅ Proyecto eliminado exitosamente.");
             EntidadObservableSingleton.getInstancia().notificarObservadores();
         } else {
-            JOptionPane.showMessageDialog(null, "❌ No se pudo eliminar la cuenta.");
+            JOptionPane.showMessageDialog(null, "❌ No se pudo eliminar el proyecto.");
         }
 
         return eliminado;
     }
+
 }
